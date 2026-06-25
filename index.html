@@ -475,15 +475,6 @@
       object-fit: contain; object-position: bottom center;
       display: block;
       max-height: 720px;
-      /* Fade left edge into text section, fade bottom into page */
-      -webkit-mask-image:
-        linear-gradient(to right,  transparent 0%, black 22%, black 100%),
-        linear-gradient(to top,    transparent 0%, black 18%, black 100%);
-      -webkit-mask-composite: source-in;
-      mask-image:
-        linear-gradient(to right,  transparent 0%, black 22%, black 100%),
-        linear-gradient(to top,    transparent 0%, black 18%, black 100%);
-      mask-composite: intersect;
     }
 
     /* ===== IG HIGHLIGHTS ===== */
@@ -644,11 +635,6 @@
         max-height: 480px;
         width: 85%;
         margin: 0 auto;
-        /* On mobile: no left fade, only bottom fade */
-        -webkit-mask-image: linear-gradient(to top, transparent 0%, black 20%, black 100%);
-        -webkit-mask-composite: source-over;
-        mask-image: linear-gradient(to top, transparent 0%, black 20%, black 100%);
-        mask-composite: add;
       }
     }
 
