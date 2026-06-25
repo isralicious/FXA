@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FXA — Andreea's Trading Community</title>
+  <meta name="description" content="Join FXA — Andreea's elite trading community. Real signals, real profits, real results every week.">
+  <meta property="og:title" content="FXA — Join Andreea's Trading Community">
+  <meta property="og:description" content="Copy trades, join live sessions, and generate consistent income from the markets.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #080014;
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ===== CSS VARS ===== */
+    :root {
+      --bg:          #080014;
+      --bg2:         #100025;
+      --bg3:         #180035;
+      --purple-deep:  #3B0764;
+      --purple:       #6D28D9;
+      --purple-mid:   #7C3AED;
+      --purple-light: #A78BFA;
+      --purple-glow:  rgba(109, 40, 217, 0.45);
+      --border:       rgba(167, 139, 250, 0.18);
+      --border-hover: rgba(167, 139, 250, 0.5);
+      --card:         rgba(55, 10, 90, 0.45);
+      --muted:        rgba(255,255,255,0.55);
+      --light-muted:  #C4B5FD;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(8, 0, 20, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 20px;
+      height: 62px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: inherit;
+    }
+    .logo img { height: 36px; object-fit: contain; }
+    .logo-text {
+      font-size: 22px; font-weight: 900; letter-spacing: -0.5px; color: #fff;
+    }
+    .logo-text em { color: var(--purple-light); font-style: normal; }
+    header nav {
+      display: flex; align-items: center; gap: 20px;
+    }
+    header nav a {
+      color: var(--light-muted); text-decoration: none;
+      font-size: 14px; font-weight: 500; transition: color .2s;
+    }
+    header nav a:hover { color: #fff; }
+    .btn-join-nav {
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-light));
+      color: #fff !important;
+      padding: 9px 18px; border-radius: 9px; font-weight: 700;
+      font-size: 14px; letter-spacing: -.1px;
+      box-shadow: 0 4px 16px rgba(109,40,217,0.4);
+      transition: transform .15s, box-shadow .15s;
+      white-space: nowrap;
+    }
+    .btn-join-nav:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(109,40,217,.55); }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 70px 20px 56px;
+      text-align: center;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(109,40,217,.35) 0%, transparent 70%),
+        var(--bg);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(109,40,217,.08) 0%, transparent 60%),
+                  radial-gradient(circle at 80% 50%, rgba(167,139,250,.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(109,40,217,.18);
+      border: 1px solid rgba(167,139,250,.3);
+      border-radius: 100px; padding: 7px 18px;
+      font-size: 13px; font-weight: 600; color: var(--purple-light);
+      margin-bottom: 28px; position: relative;
+    }
+    .hero h1 {
+      font-size: clamp(30px, 6vw, 66px);
+      font-weight: 900; line-height: 1.08; letter-spacing: -2px;
+      max-width: 860px; margin: 0 auto 20px; position: relative;
+    }
+    .hero h1 .hl { color: var(--purple-light); }
+    .hero-sub {
+      font-size: clamp(15px, 2.2vw, 20px);
+      color: var(--muted); max-width: 580px; margin: 0 auto 36px; position: relative;
+    }
+
+    /* VSL */
+    .vsl-wrap {
+      max-width: 880px; margin: 0 auto 40px;
+      border-radius: 18px; overflow: hidden;
+      border: 1px solid rgba(167,139,250,.22);
+      box-shadow:
+        0 0 0 1px rgba(109,40,217,.2),
+        0 20px 60px rgba(0,0,0,.5),
+        0 0 80px rgba(109,40,217,.25);
+    }
+
+    /* CTA Button */
+    .btn-cta {
+      display: inline-block;
+      background: linear-gradient(135deg, #6D28D9 0%, #8B5CF6 50%, #A78BFA 100%);
+      color: #fff; text-decoration: none;
+      padding: 18px 48px;
+      border-radius: 14px;
+      font-size: 18px; font-weight: 800; letter-spacing: -.3px;
+      box-shadow: 0 8px 36px rgba(109,40,217,.5), 0 2px 8px rgba(0,0,0,.3);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 14px 44px rgba(109,40,217,.65); }
+    .btn-cta:active { transform: translateY(0); }
+    .hero-trust {
+      display: flex; align-items: center; justify-content: center; gap: 20px;
+      flex-wrap: wrap; margin-top: 16px;
+      font-size: 13px; color: var(--muted);
+    }
+    .hero-trust span::before { content: '✓ '; color: var(--purple-light); font-weight: 700; }
+
+    /* ===== SCARCITY BAR ===== */
+    .scarcity-wrap {
+      max-width: 880px; margin: 0 auto 32px;
+      background: rgba(109,40,217,.1);
+      border: 1px solid rgba(167,139,250,.28);
+      border-radius: 16px; padding: 18px 24px;
+      text-align: left; position: relative;
+    }
+    .scarcity-header {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 14px; font-weight: 700; margin-bottom: 10px; color: #fff;
+    }
+    .scarcity-header .s-pct { color: var(--purple-light); font-size: 13px; font-weight: 600; }
+    .scarcity-track {
+      height: 11px; background: rgba(255,255,255,.1);
+      border-radius: 100px; overflow: hidden;
+    }
+    .scarcity-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--purple-mid), var(--purple-light));
+      border-radius: 100px;
+      transition: width .7s cubic-bezier(.25,.8,.25,1);
+      box-shadow: 0 0 12px rgba(167,139,250,.55);
+    }
+    .scarcity-note {
+      margin-top: 10px; font-size: 12px; color: var(--muted);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .scarcity-note strong { color: #fbbf24; }
+    .scarcity-pulse {
+      display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+      background: #22c55e; flex-shrink: 0;
+      box-shadow: 0 0 0 0 rgba(34,197,94,.4);
+      animation: pulse-green 2s infinite;
+    }
+    @keyframes pulse-green {
+      0%   { box-shadow: 0 0 0 0 rgba(34,197,94,.5); }
+      70%  { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+      100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+    }
+
+    /* ===== JOIN NOTIFICATIONS ===== */
+    #notif-container {
+      position: fixed; bottom: 24px; left: 20px; z-index: 500;
+      display: flex; flex-direction: column-reverse; gap: 10px;
+      pointer-events: none; max-width: 290px;
+    }
+    .join-notif {
+      background: rgba(16, 2, 32, 0.93);
+      border: 1px solid rgba(167,139,250,.35);
+      border-radius: 14px; padding: 13px 16px;
+      font-size: 13px; line-height: 1.4;
+      display: flex; align-items: center; gap: 10px;
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 8px 28px rgba(0,0,0,.5);
+      opacity: 0; transform: translateY(14px) scale(.97);
+      transition: opacity .35s ease, transform .35s ease;
+    }
+    .join-notif.show { opacity: 1; transform: translateY(0) scale(1); }
+    .notif-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: #22c55e; flex-shrink: 0;
+      box-shadow: 0 0 7px #22c55e;
+    }
+    .notif-text { color: rgba(255,255,255,.85); }
+    .notif-text strong { color: #fff; }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      background: var(--bg2);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 28px 20px;
+    }
+    .stats-inner {
+      max-width: 960px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-around;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .stat { text-align: center; min-width: 80px; }
+    .stat-n { font-size: 28px; font-weight: 900; letter-spacing: -1px; color: #fff; }
+    .stat-n em { color: var(--purple-light); font-style: normal; }
+    .stat-l { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; margin-top: 3px; }
+
+    /* ===== SHARED SECTION STYLES ===== */
+    section { padding: 72px 20px; }
+    .inner { max-width: 1100px; margin: 0 auto; }
+    .s-tag {
+      display: inline-block;
+      background: rgba(109,40,217,.14);
+      border: 1px solid var(--border);
+      border-radius: 100px; padding: 5px 16px;
+      font-size: 11px; font-weight: 700; color: var(--purple-light);
+      text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 16px;
+    }
+    .s-title {
+      font-size: clamp(26px, 4.5vw, 44px);
+      font-weight: 900; letter-spacing: -1px; margin-bottom: 14px; line-height: 1.1;
+    }
+    .s-title em { color: var(--purple-light); font-style: normal; }
+    .s-sub { font-size: 16px; color: var(--muted); max-width: 600px; margin-bottom: 44px; line-height: 1.7; }
+
+    /* Center all section headers by default */
+    .inner { text-align: center; }
+    .inner .s-sub { margin-left: auto; margin-right: auto; }
+    /* Grids and cards inside inner stay left-aligned */
+    .audience-grid, .ways-grid, .feedback-grid,
+    .roadmap-wrap, .highlights-row,
+    .a-card, .w-card, .f-vid,
+    .about-layout { text-align: left; }
+
+    /* ===== BUILT FOR YOU ===== */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px; margin-top: 8px;
+    }
+    .a-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px; padding: 28px 24px;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
+      backdrop-filter: blur(6px);
+    }
+    .a-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(109,40,217,.2);
+    }
+    .a-card .icon { font-size: 32px; margin-bottom: 12px; }
+    .a-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .a-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* ===== HOW YOU USE IT ===== */
+    .bg-alt { background: var(--bg2); }
+    .ways-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .w-card {
+      background: rgba(8,0,20,.7);
+      border: 1px solid var(--border);
+      border-radius: 18px; padding: 28px 24px;
+      position: relative; overflow: hidden;
+      transition: border-color .25s, transform .25s;
+    }
+    .w-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+    .w-num {
+      position: absolute; top: 14px; right: 18px;
+      font-size: 52px; font-weight: 900; color: rgba(167,139,250,.1);
+      line-height: 1; user-select: none;
+    }
+    .w-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; position: relative; }
+    .w-card p { font-size: 14px; color: var(--muted); line-height: 1.6; position: relative; }
+
+    /* ===== ROADMAP ===== */
+    .roadmap-wrap { overflow-x: auto; padding-bottom: 8px; margin-top: 8px; }
+    .roadmap-wrap::-webkit-scrollbar { height: 4px; }
+    .roadmap-wrap::-webkit-scrollbar-track { background: var(--bg3); border-radius: 2px; }
+    .roadmap-wrap::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 2px; }
+    .roadmap-row {
+      display: flex; align-items: flex-start; gap: 0;
+      justify-content: center; min-width: max-content;
+      padding: 8px 20px;
+    }
+    .r-step {
+      flex: 0 0 240px; text-align: center;
+      padding: 0 14px; position: relative;
+    }
+    .r-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 23px; left: calc(50% + 26px);
+      width: calc(100% - 52px); height: 2px;
+      background: linear-gradient(90deg, var(--purple-mid), rgba(109,40,217,.2));
+    }
+    .r-circle {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-light));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 19px; font-weight: 900; margin: 0 auto 18px;
+      box-shadow: 0 0 24px rgba(109,40,217,.5);
+    }
+    .r-step h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .r-step p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* ===== FEEDBACK VIDEOS ===== */
+    .feedback-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px; margin-top: 8px;
+    }
+    .f-vid {
+      border-radius: 16px; overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 28px rgba(0,0,0,.4);
+      transition: border-color .25s, transform .25s;
+      background: #000;
+    }
+    .f-vid:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+
+    /* ===== RESULTS CAROUSEL ===== */
+    .carousel-wrap {
+      overflow: hidden; position: relative;
+      margin-top: 40px;
+    }
+    .carousel-wrap::before,
+    .carousel-wrap::after {
+      content: '';
+      position: absolute; top: 0; bottom: 0; width: 60px; z-index: 2;
+      pointer-events: none;
+    }
+    .carousel-wrap::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
+    .carousel-wrap::after  { right: 0; background: linear-gradient(-90deg, var(--bg), transparent); }
+    .carousel-track {
+      display: flex; gap: 14px;
+      overflow-x: auto; scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 8px 20px 16px;
+      scroll-behavior: smooth;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+    .c-img {
+      flex: 0 0 260px; height: 185px;
+      object-fit: cover; border-radius: 14px;
+      border: 1px solid var(--border);
+      scroll-snap-align: start;
+      display: block;
+      transition: transform .2s;
+    }
+    .c-img:hover { transform: scale(1.03); }
+    .c-placeholder {
+      flex: 0 0 260px; height: 185px; flex-shrink: 0;
+      background: var(--card);
+      border: 1px dashed rgba(167,139,250,.3);
+      border-radius: 14px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; color: var(--muted); font-size: 13px; text-align: center; padding: 20px;
+    }
+    .c-placeholder .big { font-size: 28px; }
+    .carousel-nav {
+      display: flex; justify-content: center; align-items: center; gap: 14px;
+      margin-top: 20px;
+    }
+    .carousel-nav button {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--card); border: 1px solid var(--border);
+      color: #fff; font-size: 22px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s, border-color .2s, transform .15s;
+      line-height: 1;
+    }
+    .carousel-nav button:hover {
+      background: var(--purple-mid); border-color: var(--purple-light);
+      transform: scale(1.08);
+    }
+    .carousel-nav button:active { transform: scale(.96); }
+
+    /* ===== UNMUTE BUTTON ===== */
+    .vsl-unmute-btn {
+      position: absolute; top: 50%; left: 50%; z-index: 10;
+      transform: translate(-50%, -50%);
+      background: rgba(109,40,217,.88);
+      border: 2px solid rgba(167,139,250,.6);
+      border-radius: 16px;
+      color: #fff; font-size: 18px; font-weight: 800;
+      padding: 18px 38px;
+      cursor: pointer; display: flex; align-items: center; gap: 12px;
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 8px 40px rgba(109,40,217,.6);
+      transition: transform .15s, box-shadow .15s, opacity .3s;
+      animation: pulseBtn 2s ease-in-out infinite;
+      letter-spacing: -.2px;
+      white-space: nowrap;
+    }
+    .vsl-unmute-btn:hover {
+      transform: translate(-50%, -50%) scale(1.06);
+      box-shadow: 0 12px 48px rgba(109,40,217,.8);
+    }
+    @keyframes pulseBtn {
+      0%, 100% { box-shadow: 0 8px 40px rgba(109,40,217,.6); }
+      50%       { box-shadow: 0 8px 56px rgba(167,139,250,.7), 0 0 0 8px rgba(109,40,217,.12); }
+    }
+    .vsl-unmute-btn .unmute-icon { font-size: 24px; }
+
+    /* ===== ABOUT SECTION ===== */
+    .about-section {
+      position: relative; overflow: hidden; padding: 0;
+      background:
+        linear-gradient(180deg, var(--bg2) 0%, var(--bg) 40%, var(--bg3) 100%);
+    }
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      max-width: 1200px; margin: 0 auto;
+      position: relative; z-index: 2;
+      min-height: 600px;
+    }
+    .about-text {
+      padding: 80px 48px 80px 40px;
+      text-align: left;
+    }
+    .about-text .s-tag { display: inline-block; }
+    .about-text .s-title { font-size: clamp(28px, 3.5vw, 46px); }
+    .about-text .s-sub { max-width: 100%; margin-left: 0; color: var(--muted); margin-bottom: 24px; }
+    .about-story p {
+      font-size: 15px; color: rgba(255,255,255,.72); line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .about-story p strong { color: var(--purple-light); }
+    .about-stats-row {
+      display: flex; gap: 28px; margin-top: 36px; flex-wrap: wrap;
+    }
+    .about-stat { text-align: left; }
+    .about-stat .n {
+      font-size: 28px; font-weight: 900; letter-spacing: -1px; color: #fff;
+    }
+    .about-stat .n em { color: var(--purple-light); font-style: normal; }
+    .about-stat .l { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; margin-top: 2px; }
+    .about-img-col {
+      position: relative; align-self: stretch;
+      display: flex; align-items: flex-end; justify-content: center;
+      overflow: hidden;
+    }
+    .about-img-col::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(90deg, var(--bg) 0%, transparent 35%),
+        linear-gradient(0deg, var(--bg3) 0%, transparent 30%),
+        linear-gradient(180deg, var(--bg2) 0%, transparent 20%);
+      z-index: 1; pointer-events: none;
+    }
+    .about-photo {
+      width: 100%; max-width: 540px;
+      object-fit: contain; object-position: bottom center;
+      display: block;
+      mix-blend-mode: screen;
+      filter: brightness(1.05) contrast(1.05);
+      position: relative; z-index: 0;
+      max-height: 700px;
+    }
+
+    /* ===== IG HIGHLIGHTS ===== */
+    .bg-alt2 { background: var(--bg3); }
+    .highlights-row {
+      display: flex; flex-wrap: wrap; gap: 22px; justify-content: center;
+      margin-top: 40px;
+    }
+    .ig-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      background: none; border: none; cursor: pointer; padding: 0; color: inherit;
+    }
+    .ig-ring {
+      width: 82px; height: 82px; border-radius: 50%; padding: 2.5px;
+      background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    }
+    .ig-inner {
+      width: 100%; height: 100%; border-radius: 50%;
+      overflow: hidden; border: 2.5px solid var(--bg3);
+      background: var(--card);
+    }
+    .ig-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .ig-lbl { font-size: 11px; color: var(--muted); }
+
+    /* STORY POPUP */
+    .overlay {
+      display: none; position: fixed; inset: 0; z-index: 900;
+      background: rgba(8,0,20,.75);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      align-items: center; justify-content: center;
+    }
+    .overlay.open { display: flex; }
+    .story-box {
+      position: relative;
+      width: min(310px, 88vw);
+      background: #000; border-radius: 22px; overflow: hidden;
+      box-shadow: 0 30px 90px rgba(0,0,0,.8), 0 0 0 1px rgba(167,139,250,.2);
+      animation: popIn .28s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(.82) translateY(10px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .story-close {
+      position: absolute; top: 12px; right: 12px; z-index: 10;
+      width: 34px; height: 34px;
+      background: rgba(255,255,255,.18); border: none; border-radius: 50%;
+      color: #fff; font-size: 18px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(6px); transition: background .2s;
+    }
+    .story-close:hover { background: rgba(255,255,255,.32); }
+    .s-nav-btn {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+      width: 34px; height: 34px;
+      background: rgba(255,255,255,.18); border: none; border-radius: 50%;
+      color: #fff; font-size: 20px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(6px); transition: background .2s;
+    }
+    .s-nav-btn:hover { background: rgba(255,255,255,.32); }
+    .s-prev { left: 8px; }
+    .s-next { right: 8px; }
+    .story-vid { padding-top: 177.78%; position: relative; }
+    .story-vid iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .story-footer {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.7), transparent);
+      padding: 22px 16px 14px;
+      font-size: 13px; font-weight: 600; color: #fff; text-align: center;
+    }
+
+    /* ===== CTA SECTION ===== */
+    .cta-sec {
+      text-align: center;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 110%, rgba(109,40,217,.3), transparent 70%),
+        var(--bg);
+    }
+    .cta-sec .s-title { max-width: 700px; margin-left: auto; margin-right: auto; }
+    .cta-sec p { max-width: 500px; margin: 0 auto 32px; color: var(--muted); font-size: 17px; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 32px 20px; text-align: center;
+    }
+    footer p { font-size: 13px; color: var(--muted); }
+    footer strong { color: var(--purple-light); }
+    footer .disclaimer {
+      font-size: 11px; color: rgba(255,255,255,.3);
+      margin-top: 10px; max-width: 680px; margin-left: auto; margin-right: auto;
+      line-height: 1.6;
+    }
+
+    /* ===== RESPONSIVE — TABLET ===== */
+    @media (max-width: 900px) {
+      .feedback-grid { grid-template-columns: repeat(2, 1fr); }
+      .audience-grid { grid-template-columns: repeat(2, 1fr); }
+      .ways-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ===== RESPONSIVE — MOBILE ===== */
+    @media (max-width: 640px) {
+      /* Header */
+      header { padding: 0 16px; }
+      header nav a:not(.btn-join-nav) { display: none; }
+      .btn-join-nav { padding: 8px 14px; font-size: 13px; }
+
+      /* Hero */
+      .hero { padding: 52px 16px 44px; }
+      .hero h1 { letter-spacing: -1.2px; }
+      .btn-cta { padding: 16px 28px; font-size: 16px; width: 100%; max-width: 340px; text-align: center; }
+      .hero-trust { gap: 14px; font-size: 12px; }
+
+      /* Stats — 2 columns */
+      .stats-bar { padding: 20px 16px; }
+      .stats-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 12px; justify-items: center; }
+      .stats-inner .stat:last-child { grid-column: 1 / -1; }
+      .stat-n { font-size: 24px; }
+
+      /* Sections */
+      section { padding: 52px 16px; }
+      .s-title { letter-spacing: -.6px; }
+      .s-sub { font-size: 15px; margin-bottom: 32px; }
+
+      /* Cards — 1 column */
+      .audience-grid { grid-template-columns: 1fr; gap: 12px; }
+      .ways-grid { grid-template-columns: 1fr; gap: 12px; }
+      .a-card, .w-card { padding: 22px 20px; }
+
+      /* Feedback — 2 columns (already ok) */
+      .feedback-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+      /* Roadmap */
+      .r-step { flex: 0 0 200px; }
+
+      /* Carousel */
+      .c-img, .c-placeholder { flex: 0 0 200px; height: 145px; }
+      .carousel-nav button { width: 44px; height: 44px; font-size: 20px; }
+
+      /* CTA */
+      .cta-sec p { font-size: 15px; }
+    }
+
+    @media (max-width: 900px) {
+      .about-layout { grid-template-columns: 1fr; }
+      .about-text { padding: 56px 24px 24px; }
+      .about-img-col { min-height: 380px; }
+      .about-photo { max-height: 420px; }
+      .about-img-col::before {
+        background:
+          linear-gradient(0deg, var(--bg3) 0%, transparent 40%),
+          linear-gradient(180deg, var(--bg2) 0%, transparent 20%);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .about-text { padding: 44px 16px 20px; }
+      .about-stats-row { gap: 20px; }
+      .vsl-unmute-btn { font-size: 15px; padding: 14px 26px; }
+    }
+
+    @media (max-width: 400px) {
+      .feedback-grid { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <a href="#" class="logo">
+    <img src="/site-logo.png" alt="FXA" onerror="this.style.display='none'">
+    <span class="logo-text">FX<em>A</em></span>
+  </a>
+  <nav>
+    <a href="#results">Results</a>
+    <a href="#about-andreea">About</a>
+    <a href="https://t.me/+iS1mGgV2YHxkOWU0" target="_blank" class="btn-join-nav">Join Now →</a>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-badge">🔥 Trusted by thousands of traders worldwide</div>
+
+  <h1>The Trading Community That<br><span class="hl">Actually Makes You Money</span></h1>
+  <p class="hero-sub">Join Andreea and her community of traders getting real signals, real profits, and real results — every single week.</p>
+
+  <!-- VSL -->
+  <div class="vsl-wrap">
+    <div style="padding:56.25% 0 0 0;position:relative;">
+      <iframe
+        id="vsl-iframe"
+        src="https://player.vimeo.com/video/1204559294?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=vsl-iframe&amp;app_id=58479&amp;muted=1"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;"
+        title="FXA VSL"
+      ></iframe>
+      <button class="vsl-unmute-btn" id="vsl-unmute-btn" aria-label="Unmute video">
+        <span class="unmute-icon">🔊</span> Tap to Unmute
+      </button>
+    </div>
+  </div>
+
+  <!-- Scarcity bar -->
+  <div class="scarcity-wrap">
+    <div class="scarcity-header">
+      <span>🔥 <span id="spots-taken">67</span> of 80 free spots taken this month</span>
+      <span class="s-pct"><span id="spots-pct">84%</span> full</span>
+    </div>
+    <div class="scarcity-track">
+      <div class="scarcity-fill" id="spots-bar-fill" style="width:83.75%"></div>
+    </div>
+    <p class="scarcity-note">
+      <span class="scarcity-pulse"></span>
+      Only <strong id="spots-left">13</strong> spots remaining — spots are filling fast
+    </p>
+  </div>
+
+  <a href="https://t.me/+iS1mGgV2YHxkOWU0" target="_blank" class="btn-cta">👉 Join FXA Now — It's Free</a>
+  <div class="hero-trust">
+    <span>Free to join</span>
+    <span>Cancel anytime</span>
+    <span>Instant access</span>
+  </div>
+</section>
+
+<!-- ===== STATS BAR ===== -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-n">2,000<em>+</em></div>
+      <div class="stat-l">Active Members</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">78<em>%</em></div>
+      <div class="stat-l">Win Rate</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">25<em>+</em></div>
+      <div class="stat-l">Combined Experience</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">$3M<em>+</em></div>
+      <div class="stat-l">Member Profits</div>
+    </div>
+    <div class="stat">
+      <a href="https://www.trustpilot.com/review/fxa.com" target="_blank"
+         style="text-decoration:none;color:inherit;">
+        <div class="stat-n" style="color:#00b67a;">4.9<em style="color:#00b67a;">/5</em></div>
+        <div class="stat-l">⭐ Trustpilot</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BUILT FOR YOU ===== -->
+<section id="about">
+  <div class="inner">
+    <div class="s-tag">Who It's For</div>
+    <h2 class="s-title">Built For <em>Every Type</em> of Trader</h2>
+    <p class="s-sub">Whether you're completely new to trading or already in the markets — FXA was built to work for you.</p>
+    <div class="audience-grid">
+      <div class="a-card">
+        <div class="icon">🌱</div>
+        <h3>Total Beginners</h3>
+        <p>Never traded before? No problem. Andreea breaks everything down from scratch so you can start making money from day one — no experience needed.</p>
+      </div>
+      <div class="a-card">
+        <div class="icon">📈</div>
+        <h3>Experienced Traders</h3>
+        <p>Already in the markets? Sharpen your edge with advanced strategies, live sessions, and access to a community of serious, profitable traders.</p>
+      </div>
+      <div class="a-card">
+        <div class="icon">⏱️</div>
+        <h3>Busy Professionals</h3>
+        <p>Have a job or a business? Just copy Andreea's trades directly — XAU scalping, swing trades, crypto — and earn on the side without staring at charts all day.</p>
+      </div>
+      <div class="a-card">
+        <div class="icon">🚀</div>
+        <h3>Opportunity Seekers</h3>
+        <p>Don't want to miss the next big move — IPOs, major news events, market shifts? FXA alerts you first so you can act before everyone else does.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RESULTS CAROUSEL ===== -->
+<section id="results">
+  <div class="inner">
+    <div class="s-tag">Profits</div>
+    <h2 class="s-title">Real <em>Results</em> From Real Members</h2>
+    <p class="s-sub">Actual screenshots from our members' trading accounts — every single week without fail.</p>
+  </div>
+  <div class="carousel-wrap">
+    <div class="carousel-track" id="carousel-track">
+      <!-- Populated by JS from /images/ folder -->
+    </div>
+  </div>
+  <div class="carousel-nav">
+    <button id="car-prev" aria-label="Previous">&#8249;</button>
+    <button id="car-next" aria-label="Next">&#8250;</button>
+  </div>
+</section>
+
+<!-- ===== HOW YOU USE IT ===== -->
+<section class="bg-alt">
+  <div class="inner">
+    <div class="s-tag">How It Works</div>
+    <h2 class="s-title">4 Ways to <em>Make Money</em> With FXA</h2>
+    <p class="s-sub">Pick the approach that fits your lifestyle — or use all four. There's no wrong way to profit.</p>
+    <div class="ways-grid">
+      <div class="w-card">
+        <div class="w-num">1</div>
+        <h3>Copy My Trades</h3>
+        <p>Get Andreea's exact entries and exits — XAU scalping, swing trades, crypto. Copy them manually in under 60 seconds per trade.</p>
+      </div>
+      <div class="w-card">
+        <div class="w-num">2</div>
+        <h3>Auto Copytrading</h3>
+        <p>Connect to Andreea's copytrading program and have trades execute automatically on your account — 24/7, even while you sleep.</p>
+      </div>
+      <div class="w-card">
+        <div class="w-num">3</div>
+        <h3>Trade Live With Andreea</h3>
+        <p>Join live trading sessions with Andreea and her team. Watch the analysis in real time, ask questions, and trade side by side.</p>
+      </div>
+      <div class="w-card">
+        <div class="w-num">4</div>
+        <h3>Learn & Build a Skill</h3>
+        <p>Access full courses and materials to truly master trading. Develop your own edge and eventually trade independently with confidence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ROADMAP ===== -->
+<section>
+  <div class="inner">
+    <div class="s-tag">Getting Started</div>
+    <h2 class="s-title">Start Making Money in <em>3 Simple Steps</em></h2>
+    <p class="s-sub">From zero to profits — here's exactly what happens when you join FXA.</p>
+  </div>
+  <div class="roadmap-wrap">
+    <div class="roadmap-row">
+      <div class="r-step">
+        <div class="r-circle">1</div>
+        <h3>Register With a Broker</h3>
+        <p>Create your trading account with our recommended broker in minutes — fully guided by Andreea's team.</p>
+      </div>
+      <div class="r-step">
+        <div class="r-circle">2</div>
+        <h3>Get Full VIP Access</h3>
+        <p>Instantly unlock Andreea's VIP channels, live sessions, courses, signals, and the full FXA trading toolkit.</p>
+      </div>
+      <div class="r-step">
+        <div class="r-circle">3</div>
+        <h3>Choose Your Path</h3>
+        <p>Copy trades, connect to copytrading, join live sessions, or learn at your own pace — you choose what works for you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEEDBACK VIDEOS ===== -->
+<section class="bg-alt">
+  <div class="inner">
+    <div class="s-tag">Member Feedback</div>
+    <h2 class="s-title">What Our <em>Members Say</em></h2>
+    <p class="s-sub">Real people, real experiences — hear it directly from the FXA community.</p>
+    <div class="feedback-grid">
+      <!-- Video 4 goes first -->
+      <div class="f-vid">
+        <div style="padding:177.78% 0 0 0;position:relative;">
+          <iframe src="https://player.vimeo.com/video/1204559296?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Member Feedback"></iframe>
+        </div>
+      </div>
+      <!-- Video 1 -->
+      <div class="f-vid">
+        <div style="padding:177.78% 0 0 0;position:relative;">
+          <iframe src="https://player.vimeo.com/video/1204559536?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Member Feedback"></iframe>
+        </div>
+      </div>
+      <!-- Video 2 -->
+      <div class="f-vid">
+        <div style="padding:177.78% 0 0 0;position:relative;">
+          <iframe src="https://player.vimeo.com/video/1204559293?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Member Feedback"></iframe>
+        </div>
+      </div>
+      <!-- Video 3 -->
+      <div class="f-vid">
+        <div style="padding:177.78% 0 0 0;position:relative;">
+          <iframe src="https://player.vimeo.com/video/1204559295?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Member Feedback"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ANDREEA & FXA ===== -->
+<section class="about-section" id="about-andreea">
+  <div class="about-layout">
+
+    <!-- Text -->
+    <div class="about-text">
+      <div class="s-tag">Our Story</div>
+      <h2 class="s-title">Meet <em>Andreea</em><br>& the FXA Team</h2>
+
+      <div class="about-story">
+        <p>Andreea started trading at 20 years old with just a phone, a small deposit, and no mentor. She spent years in the markets — testing strategies, blowing accounts, rebuilding — until she finally cracked the code on <strong>XAU/USD scalping and swing trading</strong>.</p>
+
+        <p>Instead of keeping it to herself, she built the community she <em>wished she had</em> when she started. That community became <strong>FXA</strong>.</p>
+
+        <p>Today, FXA is powered by a full team: <strong>professional analysts, risk managers, and traders</strong> who bring 25+ combined years of live market experience. Together they deliver signals, live sessions, courses, and 1-on-1 support — every single day.</p>
+
+        <p>The mission has never changed: <strong>make consistent trading income accessible to anyone</strong>, regardless of background, experience, or starting capital.</p>
+      </div>
+
+      <div class="about-stats-row">
+        <div class="about-stat">
+          <div class="n">2,000<em>+</em></div>
+          <div class="l">Active Members</div>
+        </div>
+        <div class="about-stat">
+          <div class="n">40<em>+</em></div>
+          <div class="l">Countries</div>
+        </div>
+        <div class="about-stat">
+          <div class="n">25<em>+</em></div>
+          <div class="l">Yrs Experience</div>
+        </div>
+        <div class="about-stat">
+          <div class="n">$3M<em>+</em></div>
+          <div class="l">Member Profits</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image -->
+    <div class="about-img-col">
+      <img
+        src="/andreea.png"
+        alt="Andreea — FXA Founder"
+        class="about-photo"
+        onerror="this.style.display='none'"
+      >
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== CTA SECTION ===== -->
+<section class="cta-sec">
+  <div class="inner">
+    <div class="s-tag">Ready?</div>
+    <h2 class="s-title">Stop Watching.<br><em>Start Earning.</em></h2>
+    <p>Join thousands of traders already making consistent profits with FXA. Free to join — start today.</p>
+    <a href="https://t.me/+iS1mGgV2YHxkOWU0" target="_blank" class="btn-cta">👉 Join FXA — Free Access</a>
+    <div class="hero-trust" style="margin-top:18px;">
+      <span>No credit card needed</span>
+      <span>Instant Telegram access</span>
+      <span>Join 2,000+ members</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p>© 2026 <strong>FXA</strong> — Andreea's Trading Community. All rights reserved.</p>
+  <p class="disclaimer">Trading involves risk. Past results do not guarantee future performance. All content is for educational and informational purposes only. Trade responsibly.</p>
+</footer>
+
+<!-- Notification toasts container -->
+<div id="notif-container"></div>
+
+<!-- ===== SCRIPTS ===== -->
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+/* ---- VSL autoplay on scroll + unmute button ---- */
+(function () {
+  var iframe   = document.getElementById('vsl-iframe');
+  var unmuteBtn = document.getElementById('vsl-unmute-btn');
+  if (!iframe) return;
+  var player;
+
+  function tryInit() {
+    try { player = new Vimeo.Player(iframe); } catch (e) { return; }
+
+    /* Autoplay muted when in view */
+    var played = false;
+    var obs = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting && !played) {
+        played = true;
+        player.play().catch(function () {});
+      }
+    }, { threshold: 0.4 });
+    obs.observe(iframe);
+
+    /* Unmute button */
+    if (unmuteBtn) {
+      unmuteBtn.addEventListener('click', function () {
+        player.setMuted(false).then(function () {
+          return player.setVolume(1);
+        }).then(function () {
+          player.play().catch(function(){});
+        }).catch(function () {});
+
+        /* Fade out and remove */
+        unmuteBtn.style.opacity = '0';
+        unmuteBtn.style.transform = 'translate(-50%, -50%) scale(.9)';
+        setTimeout(function () {
+          if (unmuteBtn.parentNode) unmuteBtn.parentNode.removeChild(unmuteBtn);
+        }, 350);
+      });
+    }
+  }
+
+  if (typeof Vimeo !== 'undefined') { tryInit(); }
+  else { window.addEventListener('load', tryInit); }
+})();
+
+/* ---- Results carousel: load images 1-30 from /images/ ---- */
+(function () {
+  var track = document.getElementById('carousel-track');
+  var btnPrev = document.getElementById('car-prev');
+  var btnNext = document.getElementById('car-next');
+  if (!track) return;
+
+  var total = 30, loaded = [];
+  var tried = 0;
+
+  function done() {
+    if (loaded.length === 0) {
+      for (var p = 0; p < 4; p++) {
+        var ph = document.createElement('div');
+        ph.className = 'c-placeholder';
+        ph.innerHTML = '<span class="big">📊</span>Profit screenshots coming soon — upload to <code>/images/</code>';
+        track.appendChild(ph);
+      }
+    } else {
+      loaded.forEach(function (src) {
+        var img = document.createElement('img');
+        img.src = src; img.alt = 'Trading profit'; img.className = 'c-img';
+        track.appendChild(img);
+      });
+    }
+  }
+
+  for (var i = 1; i <= total; i++) {
+    (function (n) {
+      var img = new Image();
+      var src = '/images/' + n + '.jpg';
+      img.onload = function () { loaded.push(src); };
+      img.onerror = function () {};
+      img.src = src;
+      img.addEventListener('load',  function () { if (++tried === total) done(); });
+      img.addEventListener('error', function () { if (++tried === total) done(); });
+    })(i);
+  }
+
+  /* Nav buttons — scroll by ~80% of visible width */
+  function scrollAmt() {
+    return Math.max(track.clientWidth * 0.78, 220);
+  }
+  if (btnPrev) {
+    btnPrev.addEventListener('click', function () {
+      track.scrollBy({ left: -scrollAmt(), behavior: 'smooth' });
+    });
+  }
+  if (btnNext) {
+    btnNext.addEventListener('click', function () {
+      track.scrollBy({ left: scrollAmt(), behavior: 'smooth' });
+    });
+  }
+})();
+
+/* ---- Scarcity counter + live join notifications ---- */
+(function () {
+  var MAX       = 80;
+  var STOP_AT   = 77;
+  var START     = 67;
+  var COOKIE    = 'fxa_spots_v1';
+
+  /* Cookie helpers */
+  function getCookie(name) {
+    var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return m ? parseInt(decodeURIComponent(m[1]), 10) : null;
+  }
+  function setCookie(name, val) {
+    var d = new Date();
+    d.setTime(d.getTime() + 30 * 24 * 60 * 60 * 1000);
+    document.cookie = name + '=' + val + '; expires=' + d.toUTCString() + '; path=/; SameSite=Lax';
+  }
+
+  /* Init count from cookie, clamp to valid range */
+  var saved = getCookie(COOKIE);
+  var count = (saved !== null && saved >= START && saved <= MAX) ? saved : START;
+
+  /* DOM refs */
+  var elTaken = document.getElementById('spots-taken');
+  var elLeft  = document.getElementById('spots-left');
+  var elBar   = document.getElementById('spots-bar-fill');
+  var elPct   = document.getElementById('spots-pct');
+
+  function updateUI() {
+    var pct = Math.round((count / MAX) * 100);
+    if (elTaken) elTaken.textContent = count;
+    if (elLeft)  elLeft.textContent  = MAX - count;
+    if (elBar)   elBar.style.width   = ((count / MAX) * 100).toFixed(2) + '%';
+    if (elPct)   elPct.textContent   = pct + '%';
+    setCookie(COOKIE, count);
+  }
+
+  function increment() {
+    if (count >= STOP_AT) return false;
+    count++;
+    updateUI();
+    return true;
+  }
+
+  /* Telegram usernames pool */
+  var users = [
+    '@elena_fx92', '@xau_queen_', '@profit_kris', '@signals_dom',
+    '@tradepro_anna', '@gold_mike77', '@fx_copy_sara', '@xcopy_ben',
+    '@bull_run_lena', '@scalper_rob_', '@fxtrades_nora', '@win_trader_j',
+    '@trade_bossss', '@algomax_fx', '@crypto_gabi_', '@xau_dani_fx',
+    '@fxpro_lina', '@daily_signals', '@copy_queen_k', '@profit_alex_'
+  ];
+
+  /* Notification intervals in ms — cycles through this list */
+  var delays = [20000, 15000, 30000, 20000, 25000, 15000, 30000, 22000, 18000, 28000];
+  var dIdx = 0;
+  var container = document.getElementById('notif-container');
+
+  function showNotif() {
+    if (count >= STOP_AT) return; /* stop firing */
+
+    /* Pick random username */
+    var user = users[Math.floor(Math.random() * users.length)];
+
+    /* Increment counter + bar FIRST (synced with notification) */
+    increment();
+
+    /* Build toast */
+    if (container) {
+      var el = document.createElement('div');
+      el.className = 'join-notif';
+      el.innerHTML =
+        '<span class="notif-dot"></span>' +
+        '<span class="notif-text"><strong>' + user + '</strong> just joined FXA and secured a free spot!</span>';
+      container.appendChild(el);
+
+      /* Animate in */
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { el.classList.add('show'); });
+      });
+
+      /* Animate out after 4.5 s */
+      setTimeout(function () {
+        el.classList.remove('show');
+        setTimeout(function () {
+          if (el.parentNode) el.parentNode.removeChild(el);
+        }, 400);
+      }, 4500);
+    }
+
+    /* Schedule next, if still below cap */
+    if (count < STOP_AT) {
+      var next = delays[dIdx % delays.length];
+      dIdx++;
+      setTimeout(showNotif, next);
+    }
+  }
+
+  /* Boot */
+  updateUI();
+  /* Fire first notification after initial delay */
+  setTimeout(showNotif, delays[dIdx++]);
+})();
+
+/* IG highlights removed — replaced by About section */
+</script>
+</body>
+</html>
