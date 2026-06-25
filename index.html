@@ -640,12 +640,18 @@
     @media (max-width: 900px) {
       .about-layout { grid-template-columns: 1fr; }
       .about-text { padding: 56px 24px 24px; }
-      .about-img-col { min-height: 380px; }
-      .about-photo { max-height: 420px; }
+      .about-img-col {
+        min-height: 320px;
+        overflow: visible;
+      }
+      .about-photo {
+        max-height: 480px;
+        width: 85%;
+        margin: 0 auto;
+      }
+      /* On mobile, remove the left-fade and only keep a subtle bottom fade */
       .about-img-col::before {
-        background:
-          linear-gradient(0deg, var(--bg3) 0%, transparent 40%),
-          linear-gradient(180deg, var(--bg2) 0%, transparent 20%);
+        background: linear-gradient(0deg, var(--bg3) 0%, transparent 30%);
       }
     }
 
