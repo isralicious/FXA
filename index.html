@@ -474,19 +474,17 @@
       content: '';
       position: absolute; inset: 0;
       background:
-        linear-gradient(90deg, var(--bg) 0%, transparent 35%),
-        linear-gradient(0deg, var(--bg3) 0%, transparent 30%),
-        linear-gradient(180deg, var(--bg2) 0%, transparent 20%);
+        linear-gradient(90deg, var(--bg2) 0%, rgba(16,0,37,0.5) 25%, transparent 55%),
+        linear-gradient(0deg, var(--bg3) 0%, transparent 25%),
+        linear-gradient(180deg, var(--bg2) 0%, transparent 15%);
       z-index: 1; pointer-events: none;
     }
     .about-photo {
-      width: 100%; max-width: 540px;
+      width: 100%; max-width: 560px;
       object-fit: contain; object-position: bottom center;
       display: block;
-      mix-blend-mode: screen;
-      filter: brightness(1.05) contrast(1.05);
       position: relative; z-index: 0;
-      max-height: 700px;
+      max-height: 720px;
     }
 
     /* ===== IG HIGHLIGHTS ===== */
@@ -622,8 +620,14 @@
       /* Feedback — 2 columns (already ok) */
       .feedback-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 
-      /* Roadmap */
-      .r-step { flex: 0 0 200px; }
+      /* Roadmap — stack vertically on mobile */
+      .roadmap-wrap { overflow-x: visible; }
+      .roadmap-row {
+        flex-direction: column; align-items: center;
+        min-width: unset; gap: 32px; padding: 8px 0;
+      }
+      .r-step { flex: 0 0 auto; width: 100%; max-width: 280px; }
+      .r-step:not(:last-child)::after { display: none; }
 
       /* Carousel */
       .c-img, .c-placeholder { flex: 0 0 200px; height: 145px; }
