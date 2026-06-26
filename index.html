@@ -185,6 +185,58 @@
       100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
     }
 
+    /* ===== IMAGE LIGHTBOX ===== */
+    .lb-overlay {
+      display: none; position: fixed; inset: 0; z-index: 800;
+      background: rgba(0,0,0,.92);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .lb-overlay.open { display: flex; }
+    .lb-img {
+      max-width: 90vw; max-height: 86vh;
+      object-fit: contain; border-radius: 12px;
+      box-shadow: 0 24px 70px rgba(0,0,0,.8);
+      animation: popIn .22s ease both;
+      display: block;
+    }
+    .lb-close {
+      position: fixed; top: 18px; right: 18px;
+      width: 42px; height: 42px; border-radius: 50%;
+      background: rgba(255,255,255,.15); border: none;
+      color: #fff; font-size: 20px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(6px); transition: background .2s; z-index: 1;
+    }
+    .lb-close:hover { background: rgba(255,255,255,.3); }
+    .lb-nav {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      width: 46px; height: 46px; border-radius: 50%;
+      background: rgba(255,255,255,.15); border: none;
+      color: #fff; font-size: 26px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(6px); transition: background .2s; z-index: 1;
+      line-height: 1;
+    }
+    .lb-nav:hover { background: rgba(255,255,255,.32); }
+    .lb-prev { left: 14px; }
+    .lb-next { right: 14px; }
+
+    /* Results link under carousel */
+    .carousel-more {
+      text-align: center; margin-top: 22px; padding: 0 20px;
+    }
+    .carousel-more a {
+      color: var(--purple-light); font-size: 14px; font-weight: 600;
+      text-decoration: none; border-bottom: 1px solid rgba(167,139,250,.35);
+      padding-bottom: 2px; transition: color .2s, border-color .2s;
+    }
+    .carousel-more a:hover { color: #fff; border-color: rgba(255,255,255,.5); }
+
+    /* Clickable carousel images */
+    .c-img { cursor: zoom-in; }
+
     /* ===== JOIN NOTIFICATIONS ===== */
     #notif-container {
       position: fixed; bottom: 24px; left: 20px; z-index: 500;
@@ -820,7 +872,20 @@
     <button id="car-prev" aria-label="Previous">&#8249;</button>
     <button id="car-next" aria-label="Next">&#8250;</button>
   </div>
+  <div class="carousel-more">
+    <a href="https://t.me/FXAResults" target="_blank">
+      This is just a small sample of our weekly results - click here to see all profits and member feedback, updated regularly 📈
+    </a>
+  </div>
 </section>
+
+<!-- Lightbox -->
+<div class="lb-overlay" id="lb-overlay">
+  <button class="lb-close" id="lb-close" aria-label="Close">✕</button>
+  <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous">&#8249;</button>
+  <img src="" alt="Profit screenshot" class="lb-img" id="lb-img">
+  <button class="lb-nav lb-next" id="lb-next" aria-label="Next">&#8250;</button>
+</div>
 
 <!-- ===== HOW YOU USE IT ===== -->
 <section class="bg-alt">
@@ -1148,7 +1213,67 @@
   setTimeout(showNotif, delays[dIdx++]);
 })();
 
-/* IG highlights removed -replaced by About section */
+/* ---- Image lightbox ---- */
+(function () {
+  var overlay = document.getElementById('lb-overlay');
+  var lbImg   = document.getElementById('lb-img');
+  var lbClose = document.getElementById('lb-close');
+  var lbPrev  = document.getElementById('lb-prev');
+  var lbNext  = document.getElementById('lb-next');
+  if (!overlay) return;
+
+  var images = [];
+  var cur = 0;
+
+  function open(srcs, idx) {
+    images = srcs; cur = idx;
+    lbImg.src = images[cur];
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+  function show(idx) {
+    cur = (idx + images.length) % images.length;
+    lbImg.style.opacity = '0';
+    setTimeout(function () {
+      lbImg.src = images[cur];
+      lbImg.style.opacity = '1';
+    }, 120);
+  }
+
+  lbImg.style.transition = 'opacity .12s ease';
+  lbClose.addEventListener('click', close);
+  lbPrev.addEventListener('click', function () { show(cur - 1); });
+  lbNext.addEventListener('click', function () { show(cur + 1); });
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!overlay.classList.contains('open')) return;
+    if (e.key === 'Escape')     close();
+    if (e.key === 'ArrowLeft')  show(cur - 1);
+    if (e.key === 'ArrowRight') show(cur + 1);
+  });
+
+  /* Attach click handlers to carousel images as they load */
+  var track = document.getElementById('carousel-track');
+  if (track) {
+    var observer = new MutationObserver(function () {
+      var imgs = track.querySelectorAll('img.c-img');
+      imgs.forEach(function (img, i) {
+        if (img.dataset.lbBound) return;
+        img.dataset.lbBound = '1';
+        img.addEventListener('click', function () {
+          var srcs = Array.from(track.querySelectorAll('img.c-img')).map(function (el) { return el.src; });
+          open(srcs, i);
+        });
+      });
+    });
+    observer.observe(track, { childList: true });
+  }
+})();
 </script>
 </body>
 </html>
