@@ -225,14 +225,28 @@
 
     /* Results link under carousel */
     .carousel-more {
-      text-align: center; margin-top: 22px; padding: 0 20px;
+      text-align: center; margin-top: 32px; padding: 0 20px;
     }
-    .carousel-more a {
-      color: var(--purple-light); font-size: 14px; font-weight: 600;
-      text-decoration: none; border-bottom: 1px solid rgba(167,139,250,.35);
-      padding-bottom: 2px; transition: color .2s, border-color .2s;
+    .carousel-more p {
+      font-size: 15px; color: var(--muted); margin-bottom: 18px; line-height: 1.6;
     }
-    .carousel-more a:hover { color: #fff; border-color: rgba(255,255,255,.5); }
+    .btn-results {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, rgba(109,40,217,.25), rgba(167,139,250,.15));
+      border: 1px solid rgba(167,139,250,.45);
+      color: #fff; text-decoration: none;
+      padding: 14px 32px; border-radius: 50px;
+      font-size: 15px; font-weight: 700; letter-spacing: -.1px;
+      transition: background .2s, border-color .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(109,40,217,.2);
+    }
+    .btn-results:hover {
+      background: linear-gradient(135deg, rgba(109,40,217,.45), rgba(167,139,250,.3));
+      border-color: rgba(167,139,250,.7);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(109,40,217,.4);
+    }
+    .btn-results .btn-icon { font-size: 18px; }
 
     /* Clickable carousel images */
     .c-img { cursor: zoom-in; }
@@ -873,8 +887,9 @@
     <button id="car-next" aria-label="Next">&#8250;</button>
   </div>
   <div class="carousel-more">
-    <a href="https://t.me/FXAResults" target="_blank">
-      This is just a small sample of our weekly results - click here to see all profits and member feedback, updated regularly 📈
+    <p>This is just a small sample of our weekly results.<br>We update it constantly with new profits from the community.</p>
+    <a href="https://t.me/FXAResults" target="_blank" class="btn-results">
+      <span class="btn-icon">📈</span> View All Results &amp; Feedback
     </a>
   </div>
 </section>
@@ -1068,7 +1083,7 @@
   else { window.addEventListener('load', tryInit); }
 })();
 
-/* ---- Results carousel: load images from /FXA feedback/ ---- */
+/* ---- Results carousel + lightbox ---- */
 (function () {
   var track   = document.getElementById('carousel-track');
   var btnPrev = document.getElementById('car-prev');
@@ -1090,16 +1105,56 @@
     'photo_2026-06-26 19.46.51.jpeg'
   ];
 
-  files.forEach(function (name) {
+  var srcs = files.map(function (n) { return encodeURI('/FXA feedback/' + n); });
+
+  /* Lightbox refs */
+  var lbOverlay = document.getElementById('lb-overlay');
+  var lbImg     = document.getElementById('lb-img');
+  var lbClose   = document.getElementById('lb-close');
+  var lbPrevBtn = document.getElementById('lb-prev');
+  var lbNextBtn = document.getElementById('lb-next');
+  var lbCur = 0;
+
+  function lbOpen(idx) {
+    lbCur = idx;
+    lbImg.src = srcs[lbCur];
+    lbOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function lbClose2() {
+    lbOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+  function lbShow(idx) {
+    lbCur = (idx + srcs.length) % srcs.length;
+    lbImg.style.opacity = '0';
+    setTimeout(function () { lbImg.src = srcs[lbCur]; lbImg.style.opacity = '1'; }, 110);
+  }
+  if (lbImg)     lbImg.style.transition = 'opacity .11s ease';
+  if (lbClose)   lbClose.addEventListener('click', lbClose2);
+  if (lbPrevBtn) lbPrevBtn.addEventListener('click', function () { lbShow(lbCur - 1); });
+  if (lbNextBtn) lbNextBtn.addEventListener('click', function () { lbShow(lbCur + 1); });
+  if (lbOverlay) lbOverlay.addEventListener('click', function (e) { if (e.target === lbOverlay) lbClose2(); });
+  document.addEventListener('keydown', function (e) {
+    if (!lbOverlay || !lbOverlay.classList.contains('open')) return;
+    if (e.key === 'Escape')     lbClose2();
+    if (e.key === 'ArrowLeft')  lbShow(lbCur - 1);
+    if (e.key === 'ArrowRight') lbShow(lbCur + 1);
+  });
+
+  /* Build carousel images and attach lightbox click handlers */
+  srcs.forEach(function (src, i) {
     var img = document.createElement('img');
-    img.src = encodeURI('/FXA feedback/' + name);
+    img.src = src;
     img.alt = 'Trading profit';
     img.className = 'c-img';
     img.onerror = function () { this.style.display = 'none'; };
+    img.addEventListener('click', function () { lbOpen(i); });
     track.appendChild(img);
   });
 
-  /* Nav buttons */
+  /* Carousel scroll nav */
   function scrollAmt() { return Math.max(track.clientWidth * 0.78, 220); }
   if (btnPrev) btnPrev.addEventListener('click', function () {
     track.scrollBy({ left: -scrollAmt(), behavior: 'smooth' });
@@ -1211,68 +1266,6 @@
   updateUI();
   /* Fire first notification after initial delay */
   setTimeout(showNotif, delays[dIdx++]);
-})();
-
-/* ---- Image lightbox ---- */
-(function () {
-  var overlay = document.getElementById('lb-overlay');
-  var lbImg   = document.getElementById('lb-img');
-  var lbClose = document.getElementById('lb-close');
-  var lbPrev  = document.getElementById('lb-prev');
-  var lbNext  = document.getElementById('lb-next');
-  if (!overlay) return;
-
-  var images = [];
-  var cur = 0;
-
-  function open(srcs, idx) {
-    images = srcs; cur = idx;
-    lbImg.src = images[cur];
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function close() {
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-    lbImg.src = '';
-  }
-  function show(idx) {
-    cur = (idx + images.length) % images.length;
-    lbImg.style.opacity = '0';
-    setTimeout(function () {
-      lbImg.src = images[cur];
-      lbImg.style.opacity = '1';
-    }, 120);
-  }
-
-  lbImg.style.transition = 'opacity .12s ease';
-  lbClose.addEventListener('click', close);
-  lbPrev.addEventListener('click', function () { show(cur - 1); });
-  lbNext.addEventListener('click', function () { show(cur + 1); });
-  overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
-  document.addEventListener('keydown', function (e) {
-    if (!overlay.classList.contains('open')) return;
-    if (e.key === 'Escape')     close();
-    if (e.key === 'ArrowLeft')  show(cur - 1);
-    if (e.key === 'ArrowRight') show(cur + 1);
-  });
-
-  /* Attach click handlers to carousel images as they load */
-  var track = document.getElementById('carousel-track');
-  if (track) {
-    var observer = new MutationObserver(function () {
-      var imgs = track.querySelectorAll('img.c-img');
-      imgs.forEach(function (img, i) {
-        if (img.dataset.lbBound) return;
-        img.dataset.lbBound = '1';
-        img.addEventListener('click', function () {
-          var srcs = Array.from(track.querySelectorAll('img.c-img')).map(function (el) { return el.src; });
-          open(srcs, i);
-        });
-      });
-    });
-    observer.observe(track, { childList: true });
-  }
 })();
 </script>
 </body>
